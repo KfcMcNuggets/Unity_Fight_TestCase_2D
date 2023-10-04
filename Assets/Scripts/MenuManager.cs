@@ -1,15 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
     private FindManager findManager;
 
+    [SerializeField]
+    private TextMeshProUGUI coinCount;
+
+    [SerializeField]
+    private TextMeshProUGUI playerName;
+
     private void Start()
     {
+        coinCount.text = PlayerPrefs.GetInt(StaticData.goldPref).ToString();
+        playerName.text = PlayerPrefs.GetString(StaticData.namePref);
         findManager = GetComponent<FindManager>();
-        UpdateEnemy();
+        findManager.Init();
     }
 
     public void UpdateEnemy()
@@ -19,6 +28,6 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(StaticData.gameScene);
     }
 }

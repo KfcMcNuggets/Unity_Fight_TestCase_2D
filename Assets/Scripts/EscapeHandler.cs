@@ -17,6 +17,6 @@ public static class SceneLoader
 {
     public static void LoadNext()
     {
-        SceneManager.LoadScene("FindScene");
+        SceneManager.LoadScene(StaticData.findScene);
     }
 }

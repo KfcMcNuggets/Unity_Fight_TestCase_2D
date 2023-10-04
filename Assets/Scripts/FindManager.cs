@@ -7,10 +7,19 @@ public class FindManager : MonoBehaviour
     [SerializeField]
     private EnemyUIProfile enemy;
 
-    public void FindEnemy()
+    [SerializeField]
+    private LoadingScreen loadingScreen;
+
+    public void Init()
     {
         enemy.Init();
-        StartCoroutine(GetRequest("https://randomuser.me/api/"));
+        FindEnemy();
+    }
+
+    public void FindEnemy()
+    {
+        loadingScreen.ShowScreen();
+        StartCoroutine(GetRequest(StaticData.charLink));
     }
 
     private IEnumerator GetRequest(string uri)
@@ -53,6 +62,7 @@ public class FindManager : MonoBehaviour
         else
         {
             enemy.SetPhoto(((DownloadHandlerTexture)request.downloadHandler).texture);
+            loadingScreen.HideScreen();
         }
     }
 }

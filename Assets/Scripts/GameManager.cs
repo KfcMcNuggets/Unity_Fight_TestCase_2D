@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform enemyParent;
 
+    [SerializeField]
+    private TextMeshProUGUI playerName;
+
     private Enemy enemy;
 
     private void Start()
@@ -36,6 +40,8 @@ public class GameManager : MonoBehaviour
         enemy.EnemyKilled += OnEnemyKilled;
 
         player.Init(balanceData);
+
+        playerName.text = PlayerPrefs.GetString(StaticData.namePref);
     }
 
     private void OnEnemyKilled()

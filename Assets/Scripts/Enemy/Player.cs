@@ -60,7 +60,6 @@ public class Player : MonoBehaviour
             {
                 if (enemyObj.TryGetComponent<Enemy>(out enemy))
                 {
-                    Debug.Log("clickEnemy");
                     enemy.GetHit(Random.Range(minDamage, maxDamage + 1));
                     enemy = null;
                 }
@@ -72,7 +71,7 @@ public class Player : MonoBehaviour
     {
         gold += reward;
 
-        PlayerPrefs.SetInt("PlayerGold", gold);
+        PlayerPrefs.SetInt(StaticData.goldPref, gold);
         PlayerPrefs.Save();
     }
 }
