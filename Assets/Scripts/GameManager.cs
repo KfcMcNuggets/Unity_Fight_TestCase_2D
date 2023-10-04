@@ -3,33 +3,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Player")]
+    [Header("Game balance parametres")]
+    [SerializeField]
+    private Balance balanceData;
+
+    [Space]
+    [Header("Prefabs")]
     [SerializeField]
     private Player player;
 
-    [Space]
-    [Header("Enemy")]
     [SerializeField]
     private Enemy enemyPrefab;
-
-    [SerializeField]
-    private int minEnemyHp;
-
-    [SerializeField]
-    private int maxEnemyHp;
-
-    [Space]
-    [Header("Reward")]
-    [SerializeField]
-    private int minReward;
-
-    [SerializeField]
-    private int maxReward;
 
     [Space]
     [Header("Other modules")]
     [SerializeField]
-    private GameUI gameUI;
+    private EndGameUI gameUI;
 
     [SerializeField]
     private Transform enemyParent;
@@ -40,14 +29,20 @@ public class GameManager : MonoBehaviour
     {
         enemy = Instantiate(enemyPrefab, enemyParent);
         enemy.tag = "Enemy";
-        enemy.Init(Random.Range(minEnemyHp, maxEnemyHp + 1), CrossSceneInfo.EnemyName);
+        enemy.Init(
+            Random.Range(balanceData.minEnemyHp, balanceData.maxEnemyHp + 1),
+            CrossSceneInfo.EnemyName
+        );
         enemy.EnemyKilled += OnEnemyKilled;
+
+        player.Init(balanceData);
     }
 
     private void OnEnemyKilled()
     {
         enemy.EnemyKilled -= OnEnemyKilled;
-        player.AddReward(Random.Range(minReward, maxReward));
-        gameUI.EndGame();
+        int reward = Random.Range(balanceData.minReward, balanceData.maxReward + 1);
+        player.AddReward(reward);
+        gameUI.EndGame(reward);
     }
 }

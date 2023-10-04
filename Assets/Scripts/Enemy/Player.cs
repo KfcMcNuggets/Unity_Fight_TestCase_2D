@@ -5,21 +5,6 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [Header("PlayerStats")]
-    [SerializeField]
-    private int minDamage;
-
-    [SerializeField]
-    private int maxDamage;
-
-    [SerializeField]
-    private float attackDelay;
-
-    private int gold;
-
-    private GameObject enemyObj;
-    private Enemy enemy;
-
     [Space]
     [Header("RaycastComponents")]
     [SerializeField]
@@ -31,12 +16,21 @@ public class Player : MonoBehaviour
     [SerializeField]
     private EventSystem eventSystem;
 
-    List<RaycastResult> results = new List<RaycastResult>();
+    private GameObject enemyObj;
+    private Enemy enemy;
+    private int gold;
+    private int minDamage;
+    private int maxDamage;
+    private float attackDelay;
     private float lastAttackTime;
+    List<RaycastResult> results = new List<RaycastResult>();
 
-    private void Start()
+    public void Init(Balance balanceData)
     {
         gold = PlayerPrefs.GetInt("PlayerGold");
+        minDamage = balanceData.minDamage;
+        maxDamage = balanceData.maxDamage;
+        attackDelay = balanceData.attackDelay;
     }
 
     void Update()
