@@ -8,12 +8,14 @@ public class Enemy : MonoBehaviour
     public event UnityAction EnemyKilled;
 
     [SerializeField]
-    private float _hp;
+    private int _hp;
 
+    private int maxHp;
+    private HPBar hpBar;
     private Animator animator;
     private Image image;
 
-    public float HP
+    public int HP
     {
         private set
         {
@@ -26,14 +28,16 @@ public class Enemy : MonoBehaviour
         get { return _hp; }
     }
 
-    public void Init(float startHp)
+    public void Init(int startHp)
     {
-        HP = startHp;
+        hpBar = GetComponentInChildren<HPBar>();
+        maxHp = startHp;
+        HP = maxHp;
         animator = GetComponent<Animator>();
         image = GetComponent<Image>();
     }
 
-    public void GetHit(float damage)
+    public void GetHit(int damage)
     {
         HP -= damage;
         animator.SetTrigger("GetHit");
@@ -44,5 +48,10 @@ public class Enemy : MonoBehaviour
         image.raycastTarget = false;
         animator.SetTrigger("Death");
         EnemyKilled?.Invoke();
+    }
+
+    public void UpdateHp()
+    {
+        hpBar.UpdateHp(_hp, maxHp);
     }
 }

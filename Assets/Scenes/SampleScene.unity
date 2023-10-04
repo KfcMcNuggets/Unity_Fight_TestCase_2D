@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01339fc43bea2164ebeab7a98c51b466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1616135056}
   enemyPrefab: {fileID: 5874039609878604084, guid: 7e88ab0020ad9b04ea4a2f2e97277c7f, type: 3}
   minEnemyHp: 50
   maxEnemyHp: 100
@@ -1074,6 +1075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDamage: 5
   maxDamage: 10
+  attackDelay: 0.5
   raycaster: {fileID: 1573788295}
   eventSystem: {fileID: 1161661680}
 --- !u!224 &1616135057

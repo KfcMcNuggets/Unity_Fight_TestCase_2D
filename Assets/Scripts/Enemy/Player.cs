@@ -7,10 +7,10 @@ public class Player : MonoBehaviour
 {
     [Header("PlayerStats")]
     [SerializeField]
-    private float minDamage;
+    private int minDamage;
 
     [SerializeField]
-    private float maxDamage;
+    private int maxDamage;
 
     [SerializeField]
     private float attackDelay;
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
                 if (enemyObj.TryGetComponent<Enemy>(out enemy))
                 {
                     Debug.Log("clickEnemy");
-                    enemy.GetHit(Random.Range(minDamage, maxDamage));
+                    enemy.GetHit(Random.Range(minDamage, maxDamage + 1));
                     enemy = null;
                 }
             }

@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour
     private Enemy enemyPrefab;
 
     [SerializeField]
-    private float minEnemyHp;
+    private int minEnemyHp;
 
     [SerializeField]
-    private float maxEnemyHp;
+    private int maxEnemyHp;
 
     [Space]
     [Header("Reward")]
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     {
         enemy = Instantiate(enemyPrefab, enemyParent);
         enemy.tag = "Enemy";
-        enemy.Init(Random.Range(minEnemyHp, maxEnemyHp));
+        enemy.Init(Random.Range(minEnemyHp, maxEnemyHp + 1));
         enemy.EnemyKilled += OnEnemyKilled;
     }
 
