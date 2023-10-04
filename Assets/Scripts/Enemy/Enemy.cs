@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -28,13 +29,14 @@ public class Enemy : MonoBehaviour
         get { return _hp; }
     }
 
-    public void Init(int startHp)
+    public void Init(int startHp, string enemyName)
     {
         hpBar = GetComponentInChildren<HPBar>();
         maxHp = startHp;
         HP = maxHp;
         animator = GetComponent<Animator>();
         image = GetComponent<Image>();
+        GetComponentInChildren<TextMeshProUGUI>().text = enemyName;
     }
 
     public void GetHit(int damage)

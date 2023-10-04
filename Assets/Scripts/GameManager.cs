@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     {
         enemy = Instantiate(enemyPrefab, enemyParent);
         enemy.tag = "Enemy";
-        enemy.Init(Random.Range(minEnemyHp, maxEnemyHp + 1));
+        enemy.Init(Random.Range(minEnemyHp, maxEnemyHp + 1), CrossSceneInfo.EnemyName);
         enemy.EnemyKilled += OnEnemyKilled;
     }
 
